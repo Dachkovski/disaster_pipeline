@@ -31,12 +31,21 @@ model = joblib.load("../models/classifier.pkl")
 def index():
     
     # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
+    # visual 1
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
+
+    # visual 2
+    genre_counts_req = df[df.request == 1].groupby('genre').count()['message']
+    genre_names_req = list(genre_counts_req.index)
+
+    # visual 3
+    cat_counts = df[df.request == 1].iloc[:,7:-2].sum()
+    cat_names = list(cat_counts.index)
+
+
     
     # create visuals
-    # TODO: Below is an example - modify to create your own visuals
     graphs = [
         {
             'data': [
@@ -47,7 +56,7 @@ def index():
             ],
 
             'layout': {
-                'title': 'Distribution of Message Genres',
+                'title': 'Distribution of overall Message Genres',
                 'yaxis': {
                     'title': "Count"
                 },
@@ -55,7 +64,48 @@ def index():
                     'title': "Genre"
                 }
             }
+        },
+
+        {
+            'data': [
+                Bar(
+                    x=genre_names_req,
+                    y=genre_counts_req
+                )
+            ],
+
+            'layout': {
+                'title': 'Distribution of Message Genres for Requests',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Genre"
+                }
+            }
+        },
+        
+        {
+            'data': [
+                Bar(
+                    x=cat_names,
+                    y=cat_counts
+                )
+            ],
+
+            'layout': {
+                'title': ' Distribution of Request Topics',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Topic"
+                }
+            }
         }
+
+
+        
     ]
     
     # encode plotly graphs in JSON
