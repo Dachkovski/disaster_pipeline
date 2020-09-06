@@ -51,7 +51,7 @@ There are three components of this app:
 3. Flask Web App - An app for data visualizations using Plotly.
 
 ### File Structure: <a name="files"></a>
-'''
+```
 - app
 | - template
 | |- master.html  # main page of web app
@@ -69,7 +69,7 @@ There are three components of this app:
 |- classifier.pkl  # saved model 
 
 - README.md
-'''
+```
 
 ### License: <a name="licensing"></a>
 
