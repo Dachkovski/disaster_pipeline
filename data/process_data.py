@@ -28,10 +28,10 @@ def clean_data(df):
     Cleaning dataframe by dividing a single column with multiple categories into separate columns, assigning according column names, and removing duplicates.
 
     ARGS: 
-    df. DataFrame. Merged data from messages and categories file.
+    df: DataFrame. Merged data from messages and categories file.
     
     OUTPUT:
-    df. DataFrame. Cleaned DataFrame.
+    df: DataFrame. Cleaned DataFrame.
     '''
     # create a dataframe of the 36 individual category columns
     categories = df.categories.str.split(';', expand=True)
