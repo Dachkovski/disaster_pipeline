@@ -133,10 +133,10 @@ def build_model():
     # parameters to fit for GridSearch                       
     parameters = {
      'features__text_pipeline__vect__ngram_range': ((1, 1), (1, 2)),
-     'features__text_pipeline__vect__max_df': (0.5, 1.0),
-     'features__text_pipeline__vect__max_features': (None, 5000, 10000),
+     #'features__text_pipeline__vect__max_df': (0.5, 1.0),
+     #'features__text_pipeline__vect__max_features': (None, 5000, 10000),
      'features__text_pipeline__tfidf__use_idf': (True, False),
-     'clf__estimator__n_estimators': [50, 100],
+     #'clf__estimator__n_estimators': [50, 100],
      'clf__estimator__learning_rate': [1.0, 0.5],
      'features__transformer_weights': (
        {'text_pipeline': 1, 'starting_verb': 0.5},
