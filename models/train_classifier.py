@@ -10,6 +10,8 @@ import numpy as np
 from sqlalchemy import create_engine
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
+from nltk.tokenize import sent_tokenize
+from nltk.tag import pos_tag
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer, TfidfVectorizer
@@ -17,6 +19,7 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.pipeline import Pipeline, FeatureUnion
 from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.model_selection import train_test_split, GridSearchCV
+
 
 def load_data(database_filepath):
     '''
@@ -32,7 +35,7 @@ def load_data(database_filepath):
     '''
 
     # Load data from database
-    engine = create_engine('sqlite:///{}'.format(database_filepath))
+    engine = create_engine('sqlite:///'+database_filepath)
     df = pd.read_sql_table('DisasterResponse', engine)  
     
     # Assign columns to input and target variables
@@ -41,6 +44,7 @@ def load_data(database_filepath):
     category_names = Y.columns.values
                            
     return X, Y, category_names
+
 
 def tokenize(text):
     '''
@@ -87,9 +91,9 @@ class StartingVerbExtractor(BaseEstimator, TransformerMixin):
         1: int. If first word is a verb, present tense, not 3rd person singular or 'RT'.
         0: int. Else.
         '''
-        sentence_list = nltk.sent_tokenize(text)
+        sentence_list = sent_tokenize(text)
         for sentence in sentence_list:
-            pos_tags = nltk.pos_tag(tokenize(sentence))
+            pos_tags = pos_tag(tokenize(sentence))
             first_word, first_tag = pos_tags[0]
             if first_tag in ['VB', 'VBP'] or first_word == 'RT':
                 return 1
@@ -102,7 +106,6 @@ class StartingVerbExtractor(BaseEstimator, TransformerMixin):
         X_tagged = pd.Series(X).apply(self.starting_verb)
                            
         return pd.DataFrame(X_tagged)
-
 
                          
 def build_model():

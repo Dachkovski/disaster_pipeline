@@ -11,8 +11,7 @@ from sqlalchemy import create_engine
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.ensemble import AdaBoostClassifier
 
-from Extractor import StartingVerbExtractor
-from Extractor import tokenize
+from Extractor import tokenize, StartingVerbExtractor
 
 app = Flask(__name__)
 
@@ -22,7 +21,7 @@ engine = create_engine('sqlite:///../data/DisasterResponse.db')
 df = pd.read_sql_table('DisasterResponse', engine)
 
 # load model
-model = joblib.load("../models/classifier.pkl")
+model = joblib.load('../models/classifier.pkl')
 
 
 # index webpage displays cool visuals and receives user input text for model
@@ -133,10 +132,11 @@ def go():
         classification_result=classification_results
     )
 
-
+'''
 def main():
     app.run(host='0.0.0.0', port=3001, debug=True)
 
 
 if __name__ == '__main__':
     main()
+'''
