@@ -11,7 +11,7 @@ from sqlalchemy import create_engine
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.ensemble import AdaBoostClassifier
 
-from Extractor import tokenize, StartingVerbExtractor
+from .Extractor import tokenize, StartingVerbExtractor
 
 app = Flask(__name__)
 
