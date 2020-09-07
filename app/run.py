@@ -9,7 +9,7 @@ import joblib
 from sqlalchemy import create_engine
 
 from sklearn.multioutput import MultiOutputClassifier
-from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
+from sklearn.ensemble import AdaBoostClassifier
 
 from Extractor import StartingVerbExtractor
 from Extractor import tokenize
