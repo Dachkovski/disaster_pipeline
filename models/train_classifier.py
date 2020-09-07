@@ -21,6 +21,7 @@ from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.model_selection import train_test_split, GridSearchCV
 
 
+
 def load_data(database_filepath):
     '''
     Load data from SQL Database.
@@ -44,7 +45,6 @@ def load_data(database_filepath):
     category_names = Y.columns.values
                            
     return X, Y, category_names
-
 
 def tokenize(text):
     '''
@@ -106,7 +106,6 @@ class StartingVerbExtractor(BaseEstimator, TransformerMixin):
         X_tagged = pd.Series(X).apply(self.starting_verb)
                            
         return pd.DataFrame(X_tagged)
-
                          
 def build_model():
     '''
